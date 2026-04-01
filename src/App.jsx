@@ -1,11 +1,8 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import About from './components/About'
-import Events from './components/Events'
-import Gallery from './components/Gallery'
+
 import Artists from './components/Artists'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
+
 import './App.css'
 import SoundIdentity from './components/SoundIdentity'
 import EventsExperimental from './components/EventsExperimental'
