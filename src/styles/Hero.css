@@ -5,106 +5,57 @@
   position: relative;
   width: 100vw;
   min-height: 100vh;
-  background: #111111;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: calc(-50vw + 50%);
-}
-/* ─── Logo (menggantikan script text) ───────── */
-.hero-logo-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  animation: fadeSlideUp 1.2s ease forwards;
-  opacity: 0;
-  transform: translateY(24px);
+  background: #0a0a0a; /* fallback while video loads */
 }
 
-.hero-logo {
-  width: clamp(280px, 55vw, 780px);
-  height: auto;
-  object-fit: contain;
-  /* Logo hitam → tampilkan di atas background putih,
-     atau mix-blend-mode multiply agar transparan di putih */
-  mix-blend-mode: multiply;
-  filter: drop-shadow(0 0 40px rgba(0, 0, 0, 0.15));
-}
-
-@media (max-width: 768px) {
-  .hero-logo {
-    width: clamp(200px, 80vw, 360px);
-  }
-}
-/* ─── Photos Grid — background layer ─────────── */
-.hero-photos-grid {
+/* ─── Video Background ───────────────────────── */
+.hero-video {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.photo-card {
-  position: absolute;
-  overflow: hidden;
-}
-
-.photo-placeholder {
   width: 100%;
   height: 100%;
-  background: #c8c3bc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  /* Slow down playback for a cinematic, dreamy feel */
+  filter: saturate(0.65) brightness(0.55);
+  transform: scale(1.04); /* slight zoom to hide edges */
+  transition: opacity 1.2s ease;
 }
 
-.photo-placeholder span {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: #8a8580;
-  text-align: center;
+/* ─── Gradient Overlay ───────────────────────── */
+/* Multi-stop: pure black at edges, barely transparent in middle
+   Gives the "film frame" luxury look                         */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    /* top vignette */
+    linear-gradient(180deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0) 28%),
+    /* bottom vignette — stronger, grounds the logo */
+    linear-gradient(0deg,   rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 42%),
+    /* left/right vignette */
+    radial-gradient(ellipse 110% 100% at 50% 50%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.6) 100%);
 }
 
-/* Photo positions */
-.photo-1 {
-  left: 2%;
-  top: 10%;
-  width: 15%;
-  height: 52%;
+/* Grain on top of overlay — luxury texture */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px;
+  opacity: 0.04;
+  pointer-events: none;
 }
 
-.photo-2 {
-  left: 40%;
-  top: 6%;
-  width: 13%;
-  height: 40%;
-}
-
-.photo-3 {
-  left: 35%;
-  bottom: 4%;
-  width: 12%;
-  height: 36%;
-}
-
-.photo-4 {
-  right: 2%;
-  top: 10%;
-  width: 15%;
-  height: 40%;
-}
-
-.photo-5 {
-  right: 18%;
-  bottom: 6%;
-  width: 13%;
-  height: 42%;
-}
-
-/* ─── Center container — above photos ────────── */
+/* ─── Center container ───────────────────────── */
 .hero-center {
   position: relative;
   z-index: 10;
@@ -117,39 +68,23 @@
   padding: 0 5%;
 }
 
-/* ─── Eyebrow ────────────────────────────────── */
-.hero-eyebrow {
-  margin-bottom: 16px;
-}
-
-.hero-eyebrow span {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(16px, 1.6vw, 24px);
-  font-weight: 400;
-  color: #1a1a1a;
-  letter-spacing: 0.06em;
-}
-
-/* ─── Script text ────────────────────────────── */
-.hero-script-wrap {
+/* ─── Logo ───────────────────────────────────── */
+.hero-logo-wrap {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
+  animation: fadeSlideUp 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+  transform: translateY(28px);
 }
 
-.hero-script {
-  display: block;
-  font-family: 'Dancing Script', cursive;
-  font-weight: 700;
-  font-size: clamp(72px, 13vw, 190px);
-  color: #1a1a1a;
-  line-height: 1;
-  white-space: nowrap;
-  filter: drop-shadow(0 0 60px rgba(255, 255, 255, 0.7));
-  animation: fadeSlideUp 1.2s ease forwards;
-  opacity: 0;
-  transform: translateY(24px);
+.hero-logo {
+  width: clamp(260px, 48vw, 700px);
+  height: auto;
+  object-fit: contain;
+  /* Invert dark logo to white so it reads on dark video */
+  filter: invert(1) drop-shadow(0 0 60px rgba(255,255,255,0.12));
 }
 
 @keyframes fadeSlideUp {
@@ -159,53 +94,82 @@
   }
 }
 
-/* Decorative underline sweeping from left to right */
-.hero-underline {
-  height: 2px;
-  background: #1a1a1a;
-  width: 80%;
-  margin-top: 8px;
-  opacity: 0;
-  transform-origin: left center;
-  transform: scaleX(0);
-  animation: drawLine 1.6s ease forwards;
-  animation-delay: 0.9s;
+/* ─── Thin bottom bar — optional brand detail ── */
+.hero-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,200,200,0.2) 30%, rgba(200,200,200,0.2) 70%, transparent);
 }
 
-@keyframes drawLine {
-  to {
-    opacity: 1;
-    transform: scaleX(1);
-  }
+/* ─── Scroll hint ────────────────────────────── */
+.hero-scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeSlideUp 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+  opacity: 0;
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(180deg, rgba(200,200,200,0.5), transparent);
+  animation: scrollPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50%       { opacity: 1;   transform: scaleY(1.15); }
+}
+
+.hero-scroll-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: rgba(200, 200, 200, 0.35);
 }
 
 /* ─── Search button ──────────────────────────── */
 .hero-search-btn {
   position: absolute;
-  bottom: 24px;
-  right: 32px;
+  bottom: 28px;
+  right: 36px;
   z-index: 40;
-  width: 46px;
-  height: 46px;
-  border: 1.5px solid #1a1a1a;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(200, 200, 200, 0.25);
   border-radius: 50%;
-  background: transparent;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
 }
 
 .hero-search-btn:hover {
-  background: #1a1a1a;
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(200,200,200,0.5);
+  transform: scale(1.08);
 }
 
 .hero-search-btn svg {
-  width: 18px;
-  height: 18px;
-  stroke: #1a1a1a;
-  transition: stroke 0.2s;
+  width: 16px;
+  height: 16px;
+  stroke: rgba(200, 200, 200, 0.75);
+  transition: stroke 0.3s ease;
 }
 
 .hero-search-btn:hover svg {
@@ -214,28 +178,10 @@
 
 /* ─── Responsive ─────────────────────────────── */
 @media (max-width: 768px) {
-  .photo-3,
-  .photo-5 {
-    display: none;
+  .hero-logo {
+    width: clamp(200px, 78vw, 340px);
   }
-
-  .photo-1 {
-    left: 1%;
-    width: 22%;
-  }
-
-  .photo-4 {
-    right: 1%;
-    width: 22%;
-  }
-
-  .photo-2 {
-    left: 37%;
-    top: 5%;
-    width: 26%;
-  }
-
-  .hero-script {
-    font-size: clamp(48px, 16vw, 80px);
+  .hero-scroll {
+    bottom: 24px;
   }
 }

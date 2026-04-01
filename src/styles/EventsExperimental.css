@@ -1,115 +1,375 @@
-.events-section {
-  background: #000;
-  color: #fff;
-  padding: 140px 40px;
+/* ══════════════════════════════════════════════════════
+   EVENTS — DARK EDITORIAL MAGAZINE
+   Arah: Dazed & Confused × Berlin Techno label site
+   Momen utama: grayscale → color reveal on hover
+   ══════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,200;0,300;0,600;1,200;1,300&family=DM+Mono:wght@300;400&display=swap');
+
+/* ─── Root ─────────────────────────────────────────── */
+.event-section {
+  --ink:        #080808;
+  --white:      #F2F2F2;
+  --silver:     #C0C0C0;
+  --silver-lo:  #9d9999;
+  --rule:       rgba(255, 255, 255, 0.10);
+  --rule-hi:    rgba(255, 255, 255, 0.22);
+  --img-height: 560px;
+
+  background: var(--ink);
+  color: var(--white);
+  padding: 130px 56px 160px;
   overflow: hidden;
-}
-
-.events-container {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-/* Title */
-.events-title {
-  font-family: "Playfair Display", serif;
-  font-size: 64px;
-  margin-bottom: 100px;
-}
-
-/* Grid */
-.events-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 120px 60px;
-}
-
-/* Item */
-.event-item {
   position: relative;
-  transform: rotate(-2deg);
-  transition: transform 0.4s ease;
 }
 
-/* Random feel */
-.event-1 {
-  transform: rotate(2deg) translateY(60px);
-}
-.event-2 {
-  transform: rotate(-3deg) translateY(-40px);
-}
-.event-3 {
-  transform: rotate(1deg) translateY(80px);
-}
-
-/* Hover normalize (keren efeknya) */
-.event-item:hover {
-  transform: rotate(0deg) scale(1.03);
-}
-
-/* Image */
-.event-image img {
-  width: 100%;
-  height: 420px;
-  object-fit: cover;
-  filter: brightness(0.7) contrast(1.1);
-  transition: all 0.5s ease;
-}
-
-/* Hover effect */
-.event-item:hover img {
-  filter: brightness(1);
-}
-
-/* Overlay text */
-.event-info {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-}
-
-/* Title besar */
-.event-info h3 {
-  font-family: "Playfair Display", serif;
-  font-size: 32px;
-  margin: 0;
-  letter-spacing: 1px;
-}
-
-/* Date */
-.event-info p {
-  font-size: 14px;
-  margin-top: 8px;
-  opacity: 0.8;
-}
-
-/* Venue */
-.event-info span {
-  font-size: 12px;
-  opacity: 0.6;
-}
-
-/* Subtle red overlay */
-.event-image::after {
-  content: "";
+/* Subtle grain on section */
+.event-section::before {
+  content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255, 0, 0, 0.15);
-  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px;
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Container ────────────────────────────────────── */
+.event-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Section header ───────────────────────────────── */
+.event-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 90px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.event-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.event-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  font-weight: 300;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--silver-lo);
+  margin: 0;
+}
+
+.event-title {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(56px, 8vw, 104px);
+  font-weight: 200;
+  line-height: 0.88;
+  letter-spacing: -0.025em;
+  color: var(--white);
+  margin: 0;
+}
+
+.event-title em {
+  font-style: italic;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.event-header-right {
+  font-family: 'Cormorant', serif;
+  font-size: 14px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--silver-lo);
+  text-align: right;
+  line-height: 1.7;
+  max-width: 220px;
+  margin: 0;
+}
+
+/* ─── Grid ─────────────────────────────────────────── */
+.event-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 48px;
+  row-gap: 0;
+}
+
+/* ─── Item ─────────────────────────────────────────── */
+.event-item {
+  position: relative;
+  padding-bottom: 80px;
+  cursor: pointer;
+}
+
+/* Stagger: even cards drop down */
+.event-item:nth-child(even) {
+  margin-top: 160px;
+}
+
+/* Item 3 pulls slightly up for rhythm */
+.event-item:nth-child(3) {
+  margin-top: -80px;
+}
+
+/* ─── Ghost index number ─────────────────────────────*/
+.event-index-ghost {
+  position: absolute;
+  top: -48px;
+  left: -8px;
+  font-family: 'Cormorant', serif;
+  font-size: clamp(120px, 14vw, 200px);
+  font-weight: 200;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  transition: -webkit-text-stroke-color 0.6s ease;
+}
+
+.event-item:hover .event-index-ghost {
+  -webkit-text-stroke-color: rgba(255, 255, 255, 0.13);
+}
+
+/* ─── Image wrapper ──────────────────────────────────*/
+.event-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Clip reveal overlay — removed, images visible from start */
+.event-image-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  transform: translateY(0%);
+  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1);
+  z-index: 2;
   pointer-events: none;
 }
 
-/* Responsive */
+.event-item.is-revealed .event-image-wrapper::after {
+  transform: translateY(-101%);
+}
+
+/* Image */
+.event-image-wrapper img {
+  width: 100%;
+  height: var(--img-height);
+  object-fit: cover;
+  object-position: center top;
+  /* Bright & colorful from start */
+  filter: brightness(0.95) contrast(1.08);
+  transform: scale(1.0);
+  transition:
+    filter   0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  display: block;
+}
+
+.event-item:hover .event-image-wrapper img {
+  filter: brightness(1.05) contrast(1.12);
+  transform: scale(1.02);
+}
+
+/* Bottom gradient on image — name readability */
+.event-image-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background: linear-gradient(0deg, rgba(8, 8, 8, 0.6) 0%, transparent 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Genre tag — top right corner of image */
+.event-genre-tag {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 4;
+  font-family: 'DM Mono', monospace;
+  font-size: 8.5px;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(8, 8, 8, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.event-item:hover .event-genre-tag {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Info block ─────────────────────────────────────*/
+.event-info {
+  position: relative;
+  z-index: 1;
+  padding-top: 20px;
+}
+
+/* Thin rule that grows on hover */
+.event-info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  width: 30px;
+  background: var(--rule-hi);
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.event-item:hover .event-info::before {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Name */
+.event-name {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(28px, 3.5vw, 46px);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  margin: 0 0 12px 0;
+  line-height: 1;
+  transition: letter-spacing 0.5s ease;
+}
+
+.event-item:hover .event-name {
+  letter-spacing: 0.04em;
+}
+
+/* Meta info */
+.event-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.event-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.event-date {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  transition: color 0.4s ease;
+}
+
+.event-venue {
+  font-family: 'Cormorant', serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+  transition: color 0.4s ease;
+}
+
+.event-item:hover .event-date,
+.event-item:hover .event-venue {
+  color: var(--white);
+}
+
+/* Index number (small, right-aligned) */
+.event-info-index {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: var(--silver-lo);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.4s ease;
+}
+
+.event-item:hover .event-info-index {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ─── Responsive ─────────────────────────────────────*/
 @media (max-width: 900px) {
-  .events-grid {
+  .event-section {
+    padding: 90px 32px 120px;
+  }
+
+  .event-grid {
     grid-template-columns: 1fr;
+    column-gap: 0;
   }
 
-  .events-title {
-    font-size: 42px;
+  .event-item:nth-child(even),
+  .event-item:nth-child(3) {
+    margin-top: 0;
   }
 
-  .event-image img {
-    height: 320px;
+  .event-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .event-header-right {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .event-section {
+    --img-height: 440px;
+  }
+}
+
+@media (max-width: 520px) {
+  .event-section {
+    padding: 72px 20px 96px;
+  }
+
+  .event-section {
+    --img-height: 360px;
+  }
+
+  .event-title {
+    font-size: clamp(42px, 6vw, 56px);
+  }
+
+  .event-name {
+    font-size: clamp(22px, 3vw, 32px);
+  }
+
+  .event-eyebrow {
+    font-size: 8.5px;
   }
 }

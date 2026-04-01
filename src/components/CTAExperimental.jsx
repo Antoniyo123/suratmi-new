@@ -4,27 +4,36 @@ import "../styles/CTAExperimental.css";
 export default function CTAExperimental() {
   return (
     <section className="cta-section">
-      
-      {/* Background glow */}
-      <div className="cta-glow"></div>
+      <div className="cta-container">
+        
+        {/* Decorative line top */}
+        <div className="cta-line-top"></div>
 
-      <div className="cta-content">
-        <h2>
-          BOOK THE SOUND
-          <br />
-          <span>OF YOUR NIGHT</span>
-        </h2>
+        {/* Main content */}
+        <div className="cta-content">
+          <h2 className="cta-heading">
+            <span className="cta-line-1">Book the Sound</span>
+            <span className="cta-line-2">
+              Of <em>Your</em> Night
+            </span>
+          </h2>
 
-        <p>
-          Bring the energy. Control the atmosphere.  
-          Let the night speak through sound.
-        </p>
+          <p className="cta-subheading">
+            Bring the energy. Control the atmosphere.
+            <br />
+            Let the night speak through sound.
+          </p>
 
-        <button className="cta-button">
-          BOOK NOW
-        </button>
+          <button className="cta-button">
+            <span className="cta-button-text">Inquire Now</span>
+            <span className="cta-button-arrow">→</span>
+          </button>
+        </div>
+
+        {/* Decorative line bottom */}
+        <div className="cta-line-bottom"></div>
+
       </div>
-
     </section>
   );
 }

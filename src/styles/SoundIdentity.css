@@ -1,89 +1,370 @@
+/* ══════════════════════════════════════════════════════
+   SOUND IDENTITY — DARK EDITORIAL MAGAZINE
+   Arah: Dazed & Confused × Premium artist intro
+   Momen utama: Hero section dengan elegant typography
+   ══════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,200;0,300;0,600;1,200;1,300&family=DM+Mono:wght@300;400&display=swap');
+
+/* ─── Root ─────────────────────────────────────────── */
 .sound-section {
-  position: relative;
-  height: 100vh;
-  background: black;
+  --ink:        #080808;
+  --white:      #F2F2F2;
+  --silver:     #C0C0C0;
+  --silver-lo:  #5A5A5A;
+  --rule:       rgba(255, 255, 255, 0.10);
+  --rule-hi:    rgba(255, 255, 255, 0.22);
+
+  background: linear-gradient(135deg, #080808 0%, #0f0f0f 100%);
+  color: var(--white);
+  padding: 140px 56px;
   overflow: hidden;
+  position: relative;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Background abstract (mirip hero tapi lebih subtle) */
-.sound-overlay {
+/* Subtle grain overlay */
+.sound-grain {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 30% 40%, rgba(255, 0, 0, 0.4), transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(255, 0, 0, 0.2), transparent 60%);
-  filter: blur(80px);
-  opacity: 0.7;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px;
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ambient glow background */
+.sound-section::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  height: 1000px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Content ──────────────────────────────────────── */
+.sound-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  opacity: 0;
+  animation: fade-in 0.9s ease-out 0.2s forwards;
+}
+
+.sound-content.loaded {
+  opacity: 1;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Container ────────────────────────────────────── */
+.sound-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
   z-index: 1;
 }
 
-/* Grain / noise biar cinematic */
-.sound-section::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("https://grainy-gradients.vercel.app/noise.svg");
-  opacity: 0.08;
-  z-index: 2;
+/* ─── Decorative Lines ─────────────────────────────── */
+.sound-line-top,
+.sound-line-bottom {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.15) 80%,
+    transparent
+  );
+  margin: 0 auto 60px;
+  animation: expand-line 1.2s ease-out 0.3s backwards;
 }
 
-/* Content */
-.sound-content {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  max-width: 900px;
-  padding: 0 20px;
+.sound-line-bottom {
+  margin-bottom: 0;
+  margin-top: 60px;
+  animation: expand-line 1.2s ease-out 0.5s backwards;
 }
 
-/* Headline (serif, gede banget) */
-.sound-content h2 {
-  font-family: "Playfair Display", serif;
-  font-size: 64px;
-  line-height: 1.2;
-  letter-spacing: 1px;
-  margin-bottom: 30px;
-}
-
-/* Highlight word */
-.sound-content h2 span {
-  display: inline-block;
-  color: #ff2a2a;
-  text-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
-}
-
-/* Subtext */
-.sound-content p {
-    color: aliceblue;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  opacity: 0.7;
-  line-height: 1.6;
-}
-
-/* Subtle animation (biar hidup) */
-.sound-content h2 span {
-  animation: glow 2.5s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
+@keyframes expand-line {
   from {
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+    width: 0;
+    opacity: 0;
   }
   to {
-    text-shadow: 0 0 30px rgba(255, 0, 0, 0.9);
+    width: 100px;
+    opacity: 1;
   }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .sound-content h2 {
-    font-size: 42px;
+/* ─── Header ───────────────────────────────────────── */
+.sound-header {
+  margin-bottom: 50px;
+  animation: slide-up 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s backwards;
+}
+
+.sound-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  font-weight: 300;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--silver-lo);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.sound-title {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(56px, 10vw, 104px);
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--white);
+  margin: 0;
+}
+
+.sound-title em {
+  font-style: italic;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.45);
+  display: block;
+  margin-top: 4px;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Description Block ────────────────────────────── */
+.sound-description-block {
+  margin-bottom: 60px;
+  animation: fade-in 0.8s ease-out 0.4s backwards;
+}
+
+.sound-description {
+  font-family: 'Cormorant', serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.3px;
+  max-width: 700px;
+  margin: 0;
+  transition: color 0.4s ease;
+}
+
+.sound-description-block:hover .sound-description {
+  color: var(--white);
+}
+
+/* ─── CTA Buttons ──────────────────────────────────── */
+.sound-cta {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+  animation: fade-in 0.8s ease-out 0.5s backwards;
+}
+
+.sound-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 44px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: var(--white);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background fill effect */
+.sound-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.06);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: -1;
+}
+
+.sound-btn:hover::before {
+  transform: scaleX(1);
+}
+
+/* Primary button styling */
+.sound-btn-primary {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.sound-btn-primary:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Secondary button styling */
+.sound-btn-secondary {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.sound-btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* Arrow animation */
+.sound-btn-arrow {
+  display: inline-block;
+  opacity: 0.6;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
+}
+
+.sound-btn-primary:hover .sound-btn-arrow {
+  transform: translateX(6px);
+  opacity: 1;
+}
+
+/* Button active state */
+.sound-btn:active {
+  transform: scale(0.98);
+}
+
+/* ─── Responsive ───────────────────────────────────── */
+@media (max-width: 1024px) {
+  .sound-section {
+    padding: 120px 32px;
   }
 
+  .sound-title {
+    font-size: clamp(48px, 8vw, 80px);
+  }
+
+  .sound-description {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
   .sound-section {
-    height: 80vh;
+    padding: 100px 32px;
+    min-height: auto;
+  }
+
+  .sound-header {
+    margin-bottom: 40px;
+  }
+
+  .sound-title {
+    font-size: clamp(40px, 7vw, 56px);
+  }
+
+  .sound-description {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .sound-description-block {
+    margin-bottom: 50px;
+  }
+
+  .sound-line-top,
+  .sound-line-bottom {
+    margin-bottom: 40px;
+  }
+
+  .sound-line-bottom {
+    margin-top: 40px;
+  }
+
+  .sound-cta {
+    gap: 16px;
+  }
+
+  .sound-btn {
+    padding: 14px 36px;
+    font-size: 10px;
+    flex-basis: calc(50% - 8px);
+  }
+}
+
+@media (max-width: 520px) {
+  .sound-section {
+    padding: 80px 20px;
+  }
+
+  .sound-header {
+    margin-bottom: 35px;
+  }
+
+  .sound-title {
+    font-size: clamp(32px, 6vw, 42px);
+  }
+
+  .sound-eyebrow {
+    font-size: 8.5px;
+    margin-bottom: 16px;
+  }
+
+  .sound-description {
+    font-size: 13px;
+  }
+
+  .sound-description-block {
+    margin-bottom: 40px;
+  }
+
+  .sound-line-top,
+  .sound-line-bottom {
+    width: 60px;
+    margin-bottom: 30px;
+  }
+
+  .sound-line-bottom {
+    margin-top: 30px;
+  }
+
+  .sound-cta {
+    flex-direction: column;
+  }
+
+  .sound-btn {
+    width: 100%;
+    padding: 13px 28px;
+    font-size: 9px;
   }
 }

@@ -1,94 +1,322 @@
-.footer {
-  background: black;
-  color: white;
-  padding: 160px 40px 60px;
+/* ══════════════════════════════════════════════════════
+   FOOTER — DARK EDITORIAL MAGAZINE
+   Arah: Dazed & Confused × Premium footer
+   Momen utama: Spacious, refined typography, loose layout
+   ══════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,200;0,300;0,600;1,200;1,300&family=DM+Mono:wght@300;400&display=swap');
+
+/* ─── Root ─────────────────────────────────────────── */
+.footer-section {
+  --ink:        #080808;
+  --white:      #F2F2F2;
+  --silver:     #C0C0C0;
+  --silver-lo:  #5A5A5A;
+  --rule:       rgba(255, 255, 255, 0.10);
+  --rule-hi:    rgba(255, 255, 255, 0.22);
+
+  background: var(--ink);
+  color: var(--white);
+  padding: 100px 56px 60px;
   position: relative;
-  overflow: hidden;
+  border-top: 1px solid var(--rule);
 }
 
-/* subtle red light (lebih halus dari sebelumnya) */
-.footer::before {
-  content: "";
-  position: absolute;
-  bottom: -150px;
-  left: 30%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(255,0,0,0.25), transparent 70%);
-  filter: blur(120px);
-}
-
-/* grain */
-.footer::after {
-  content: "";
+/* Subtle grain */
+.footer-section::before {
+  content: '';
   position: absolute;
   inset: 0;
-  background: url("https://grainy-gradients.vercel.app/noise.svg");
-  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px;
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* layout ga terlalu simetris */
-.footer-inner {
-  position: relative;
-  z-index: 2;
-  max-width: 1200px;
+/* ─── Container ────────────────────────────────────── */
+.footer-container {
+  max-width: 1300px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
-/* BIG TYPO (ini kunci) */
-.footer-brand h1 {
-  font-family: "Playfair Display", serif;
-  font-size: 120px;
-  line-height: 0.9;
-  letter-spacing: 4px;
+/* ─── Divider ──────────────────────────────────────── */
+.footer-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15) 10%,
+    rgba(255, 255, 255, 0.15) 90%,
+    transparent
+  );
   margin-bottom: 80px;
+  animation: expand-line 1s ease-out backwards;
 }
 
-/* statement kecil tapi dingin */
-.footer-statement {
-  margin-bottom: 60px;
+@keyframes expand-line {
+  from {
+    width: 0;
+    margin-left: 50%;
+    margin-right: 50%;
+  }
+  to {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
-.footer-statement p {
+/* ─── Main Grid ────────────────────────────────────── */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 80px;
+  row-gap: 60px;
+  margin-bottom: 100px;
+  align-items: flex-start;
+}
+
+.footer-col {
+  position: relative;
+  z-index: 1;
+  animation: fade-in-up 0.8s ease-out backwards;
+}
+
+.footer-col:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.footer-col:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.footer-col:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Brand ────────────────────────────────────────── */
+.footer-brand-title {
+  font-family: 'Cormorant', serif;
+  font-size: clamp(48px, 6vw, 72px);
+  font-weight: 200;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin: 0;
+  opacity: 0.9;
+  transition: opacity 0.4s ease;
+}
+
+.footer-brand:hover .footer-brand-title {
+  opacity: 1;
+}
+
+/* ─── Statement ────────────────────────────────────── */
+.footer-statement-text {
+  font-family: 'Cormorant', serif;
   font-size: 16px;
-  opacity: 0.6;
-  line-height: 1.6;
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.3px;
+  margin: 0;
+  transition: color 0.4s ease;
 }
 
-/* links dibuat lebih “loose” */
+.footer-statement:hover .footer-statement-text {
+  color: var(--white);
+}
+
+/* ─── Navigation ───────────────────────────────────── */
 .footer-links {
   display: flex;
-  gap: 60px;
-  margin-bottom: 80px;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.footer-links a {
-  color: white;
+.footer-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
-  font-size: 14px;
-  letter-spacing: 2px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
+  display: inline-block;
+  width: fit-content;
 }
 
-/* hover simple (no fancy) */
-.footer-links a:hover {
-  color: red;
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.4);
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* bottom kecil banget */
-.footer-bottom span {
+.footer-link:hover {
+  color: var(--white);
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+/* ─── Bottom Section ───────────────────────────────── */
+.footer-bottom {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-top: 40px;
+  border-top: 1px solid var(--rule);
+  animation: fade-in 0.8s ease-out 0.4s backwards;
+}
+
+.footer-copyright {
+  font-family: 'DM Mono', monospace;
   font-size: 10px;
-  opacity: 0.3;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--silver-lo);
+  margin: 0;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .footer-brand h1 {
-    font-size: 60px;
+.footer-credit {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--silver-lo);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-credit-label {
+  text-transform: uppercase;
+}
+
+.footer-credit-slash {
+  opacity: 0.5;
+}
+
+.footer-credit-name {
+  opacity: 0.8;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ─── Responsive ───────────────────────────────────── */
+@media (max-width: 1024px) {
+  .footer-grid {
+    column-gap: 60px;
+    row-gap: 50px;
   }
 
-  .footer-links {
+  .footer-brand-title {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .footer-statement-text {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-section {
+    padding: 80px 32px 50px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: 60px;
+    margin-bottom: 60px;
+  }
+
+  .footer-brand-title {
+    font-size: clamp(36px, 5vw, 48px);
+  }
+
+  .footer-statement-text {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .footer-divider {
+    margin-bottom: 60px;
+  }
+
+  .footer-bottom {
     flex-direction: column;
     gap: 20px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 520px) {
+  .footer-section {
+    padding: 60px 20px 40px;
+  }
+
+  .footer-divider {
+    margin-bottom: 50px;
+  }
+
+  .footer-grid {
+    row-gap: 50px;
+    margin-bottom: 50px;
+  }
+
+  .footer-brand-title {
+    font-size: clamp(32px, 4vw, 42px);
+  }
+
+  .footer-statement-text {
+    font-size: 13px;
+  }
+
+  .footer-link {
+    font-size: 10px;
+  }
+
+  .footer-copyright,
+  .footer-credit {
+    font-size: 9px;
+  }
+
+  .footer-bottom {
+    padding-top: 30px;
   }
 }
