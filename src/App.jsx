@@ -1,7 +1,7 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 
-import Artists from './components/Artists'
+import ArtistsExperimental from './components/Artists'
 
 import './App.css'
 import SoundIdentity from './components/SoundIdentity'
@@ -14,7 +14,7 @@ function App() {
     <div className="app">
       <Navbar />
       <Hero />
-      <Artists />
+      <ArtistsExperimental />
       <SoundIdentity />
       <EventsExperimental />
       <CTAExperimental />
