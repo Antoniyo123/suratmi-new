@@ -32,53 +32,52 @@ export default function Hero() {
   return (
     <section id="home" className="hero">
 
-      {/* ── Video background ── */}
-      <video
-        ref={videoRef}
-        className="hero-video"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        poster={VIDEO_POSTER}
-      >
-        <source src={VIDEO_SRC}      type="video/mp4" />
-        <source src={VIDEO_FALLBACK} type="video/mp4" />
-      </video>
+  {/* 🎥 Video background (slow parallax) */}
+  <video
+    ref={videoRef}
+    className="hero-video"
+    autoPlay
+    muted
+    loop
+    playsInline
+    preload="auto"
+    poster={VIDEO_POSTER}
+    data-parallax="-0.2"
+  >
+    <source src={VIDEO_SRC} type="video/mp4" />
+    <source src={VIDEO_FALLBACK} type="video/mp4" />
+  </video>
 
-      {/* ── Atmosphere overlays ── */}
-      <div className="hero-overlay" />
-      <div className="hero-grain"   />
+  {/* overlay ikut subtle */}
+  <div className="hero-overlay" data-parallax="-0.15" />
+  <div className="hero-grain" data-parallax="-0.1" />
 
-      {/* ── Logo ── */}
-      <div className="hero-center">
-        <div className="hero-logo-wrap">
-          <img
-            src={logo}
-            alt="SuratMi FM"
-            className="hero-logo"
-          />
-        </div>
-      </div>
+  {/* 🧠 Logo (center focus) */}
+  <div className="hero-center" data-parallax="-0.05">
+    <div className="hero-logo-wrap">
+      <img
+        src={logo}
+        alt="SuratMi FM"
+        className="hero-logo"
+      />
+    </div>
+  </div>
 
-      {/* ── Scroll hint ── */}
-      <div className="hero-scroll" aria-hidden="true">
-        <div className="hero-scroll-line" />
-        <span className="hero-scroll-label">Scroll</span>
-      </div>
+  {/* 👇 Scroll hint (foreground → lebih cepat dikit) */}
+  <div className="hero-scroll" data-parallax="0.1" aria-hidden="true">
+    <div className="hero-scroll-line" />
+    <span className="hero-scroll-label">Scroll</span>
+  </div>
 
-      {/* ── Bottom edge rule ── */}
-      <div className="hero-bottom-bar" />
+  <div className="hero-bottom-bar" />
 
-      {/* ── Search button ── */}
-      <button className="hero-search-btn" aria-label="Search">
-        <svg viewBox="0 0 24 24" strokeWidth="1.6" fill="none">
-          <circle cx="11" cy="11" r="7" />
-          <line x1="16.5" y1="16.5" x2="22" y2="22" />
-        </svg>
-      </button>
+  <button className="hero-search-btn" aria-label="Search">
+    <svg viewBox="0 0 24 24" strokeWidth="1.6" fill="none">
+      <circle cx="11" cy="11" r="7" />
+      <line x1="16.5" y1="16.5" x2="22" y2="22" />
+    </svg>
+  </button>
 
-    </section>
+</section>
   )
 }

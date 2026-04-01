@@ -41,3 +41,20 @@ body {
   background: rgba(26, 26, 26, 0.4);
 }
 
+/* Smooth GPU acceleration */
+[data-parallax] {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Biar video lebih cinematic */
+.hero-video {
+  object-fit: cover;
+  filter: brightness(0.7) contrast(1.1);
+}
+
+/* Optional: subtle zoom feel */
+.hero {
+  overflow: hidden;
+}
+

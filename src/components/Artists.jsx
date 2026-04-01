@@ -72,10 +72,11 @@ export default function Artists() {
         <div className="artist-grid" ref={gridRef}>
           {artists.map((artist, i) => (
             <div
-              className="artist-item"
-              key={artist.name}
-              data-delay={i * 120}
-            >
+  className="artist-item"
+  key={artist.name}
+  data-delay={i * 120}
+  data-parallax={0.04 + i * 0.015} // 🔥 beda speed tiap card
+>
               {/* Ghost index */}
               <span className="artist-index-ghost" aria-hidden="true">
                 0{i + 1}
@@ -83,14 +84,15 @@ export default function Artists() {
 
               {/* Image */}
               <div className="artist-image-wrapper">
-                <img
-                  src={artist.image}
-                  alt={artist.name}
-                  loading="lazy"
-                />
-                <div className="artist-image-gradient" />
-                <span className="artist-genre-tag">{artist.genre}</span>
-              </div>
+  <img
+    src={artist.image}
+    alt={artist.name}
+    loading="lazy"
+    data-parallax="0.08"
+  />
+  <div className="artist-image-gradient" />
+  <span className="artist-genre-tag">{artist.genre}</span>
+</div>
 
               {/* Info row */}
               <div className="artist-info">
