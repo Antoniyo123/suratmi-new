@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@700&display=swap');
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+}
+/* Scrolled state */
+.navbar {
+  transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.navbar--scrolled {
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.navbar-inner {
+  width: 100%;
+  max-width: 1300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 90px;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+.nav-left li a,
+.nav-right li a {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: lowercase;
+  transition: opacity 0.2s ease;
+  line-height: 1;
+}
+
+.nav-left li a:hover,
+.nav-right li a:hover {
+  opacity: 0.5;
+}
+
+/* Center logo */
+.navbar-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  gap: 2px;
+}
+
+.logo-emblem {
+  width: 68px;
+  height: 68px;
+  /* border: 2.5px solid #f2efef; */
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.logo-icon {
+  font-size: 32px;
+  line-height: 1;
+  color: #fff;
+}
+
+.logo-sub {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 20px;
+    height: 70px;
+  }
+
+  .nav-left,
+  .nav-right {
+    gap: 24px;
+  }
+
+  .nav-left li a,
+  .nav-right li a {
+    font-size: 16px;
+  }
+
+  .logo-emblem {
+    width: 50px;
+    height: 50px;
+  }
+
+  .logo-icon {
+    font-size: 22px;
+  }
+}

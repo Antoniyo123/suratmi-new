@@ -1,0 +1,115 @@
+.events-section {
+  background: #000;
+  color: #fff;
+  padding: 140px 40px;
+  overflow: hidden;
+}
+
+.events-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Title */
+.events-title {
+  font-family: "Playfair Display", serif;
+  font-size: 64px;
+  margin-bottom: 100px;
+}
+
+/* Grid */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 120px 60px;
+}
+
+/* Item */
+.event-item {
+  position: relative;
+  transform: rotate(-2deg);
+  transition: transform 0.4s ease;
+}
+
+/* Random feel */
+.event-1 {
+  transform: rotate(2deg) translateY(60px);
+}
+.event-2 {
+  transform: rotate(-3deg) translateY(-40px);
+}
+.event-3 {
+  transform: rotate(1deg) translateY(80px);
+}
+
+/* Hover normalize (keren efeknya) */
+.event-item:hover {
+  transform: rotate(0deg) scale(1.03);
+}
+
+/* Image */
+.event-image img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  filter: brightness(0.7) contrast(1.1);
+  transition: all 0.5s ease;
+}
+
+/* Hover effect */
+.event-item:hover img {
+  filter: brightness(1);
+}
+
+/* Overlay text */
+.event-info {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+/* Title besar */
+.event-info h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 32px;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+/* Date */
+.event-info p {
+  font-size: 14px;
+  margin-top: 8px;
+  opacity: 0.8;
+}
+
+/* Venue */
+.event-info span {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* Subtle red overlay */
+.event-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 0, 0, 0.15);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .events-title {
+    font-size: 42px;
+  }
+
+  .event-image img {
+    height: 320px;
+  }
+}

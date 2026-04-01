@@ -1,0 +1,107 @@
+.cta-section {
+  position: relative;
+  height: 100vh;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* RED GLOW BACKGROUND */
+.cta-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255,0,0,0.6), transparent 70%);
+  filter: blur(120px);
+  z-index: 1;
+}
+
+/* Noise texture */
+.cta-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.08;
+  z-index: 2;
+}
+
+/* CONTENT */
+.cta-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+/* HEADLINE */
+.cta-content h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 72px;
+  line-height: 1.1;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+/* Highlight line */
+.cta-content h2 span {
+  color: #ff2a2a;
+  text-shadow: 0 0 25px rgba(255, 0, 0, 0.8);
+}
+
+/* SUBTEXT */
+.cta-content p {
+    color: aliceblue;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  opacity: 0.7;
+  margin-bottom: 40px;
+}
+
+/* BUTTON */
+.cta-button {
+  padding: 16px 40px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  border: none;
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #ff2a2a, #800000);
+  color: white;
+
+  transition: all 0.3s ease;
+}
+
+/* Hover glow */
+.cta-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.8);
+}
+
+/* Subtle pulse animation */
+.cta-button {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.9);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cta-content h2 {
+    font-size: 42px;
+  }
+
+  .cta-section {
+    height: 80vh;
+  }
+}

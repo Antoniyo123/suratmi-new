@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Bebas+Neue&display=swap');
+
+/* ─── Section ────────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  background: #111111;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: calc(-50vw + 50%);
+}
+/* ─── Logo (menggantikan script text) ───────── */
+.hero-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  animation: fadeSlideUp 1.2s ease forwards;
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.hero-logo {
+  width: clamp(280px, 55vw, 780px);
+  height: auto;
+  object-fit: contain;
+  /* Logo hitam → tampilkan di atas background putih,
+     atau mix-blend-mode multiply agar transparan di putih */
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 0 40px rgba(0, 0, 0, 0.15));
+}
+
+@media (max-width: 768px) {
+  .hero-logo {
+    width: clamp(200px, 80vw, 360px);
+  }
+}
+/* ─── Photos Grid — background layer ─────────── */
+.hero-photos-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.photo-card {
+  position: absolute;
+  overflow: hidden;
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #c8c3bc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-placeholder span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #8a8580;
+  text-align: center;
+}
+
+/* Photo positions */
+.photo-1 {
+  left: 2%;
+  top: 10%;
+  width: 15%;
+  height: 52%;
+}
+
+.photo-2 {
+  left: 40%;
+  top: 6%;
+  width: 13%;
+  height: 40%;
+}
+
+.photo-3 {
+  left: 35%;
+  bottom: 4%;
+  width: 12%;
+  height: 36%;
+}
+
+.photo-4 {
+  right: 2%;
+  top: 10%;
+  width: 15%;
+  height: 40%;
+}
+
+.photo-5 {
+  right: 18%;
+  bottom: 6%;
+  width: 13%;
+  height: 42%;
+}
+
+/* ─── Center container — above photos ────────── */
+.hero-center {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  padding: 0 5%;
+}
+
+/* ─── Eyebrow ────────────────────────────────── */
+.hero-eyebrow {
+  margin-bottom: 16px;
+}
+
+.hero-eyebrow span {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(16px, 1.6vw, 24px);
+  font-weight: 400;
+  color: #1a1a1a;
+  letter-spacing: 0.06em;
+}
+
+/* ─── Script text ────────────────────────────── */
+.hero-script-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-script {
+  display: block;
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  font-size: clamp(72px, 13vw, 190px);
+  color: #1a1a1a;
+  line-height: 1;
+  white-space: nowrap;
+  filter: drop-shadow(0 0 60px rgba(255, 255, 255, 0.7));
+  animation: fadeSlideUp 1.2s ease forwards;
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+@keyframes fadeSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Decorative underline sweeping from left to right */
+.hero-underline {
+  height: 2px;
+  background: #1a1a1a;
+  width: 80%;
+  margin-top: 8px;
+  opacity: 0;
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: drawLine 1.6s ease forwards;
+  animation-delay: 0.9s;
+}
+
+@keyframes drawLine {
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* ─── Search button ──────────────────────────── */
+.hero-search-btn {
+  position: absolute;
+  bottom: 24px;
+  right: 32px;
+  z-index: 40;
+  width: 46px;
+  height: 46px;
+  border: 1.5px solid #1a1a1a;
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.hero-search-btn:hover {
+  background: #1a1a1a;
+}
+
+.hero-search-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: #1a1a1a;
+  transition: stroke 0.2s;
+}
+
+.hero-search-btn:hover svg {
+  stroke: #ffffff;
+}
+
+/* ─── Responsive ─────────────────────────────── */
+@media (max-width: 768px) {
+  .photo-3,
+  .photo-5 {
+    display: none;
+  }
+
+  .photo-1 {
+    left: 1%;
+    width: 22%;
+  }
+
+  .photo-4 {
+    right: 1%;
+    width: 22%;
+  }
+
+  .photo-2 {
+    left: 37%;
+    top: 5%;
+    width: 26%;
+  }
+
+  .hero-script {
+    font-size: clamp(48px, 16vw, 80px);
+  }
+}
